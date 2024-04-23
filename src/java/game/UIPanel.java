@@ -16,8 +16,12 @@ public class UIPanel extends JPanel implements Observer {
 
     private int score = 0;
     private int lives = 3;
+    private ImageIcon lifeIcon = new ImageIcon("assets/img/heart.png");
     private JLabel scoreLabel;
     private JLabel livesLabel;
+    private JLabel heartLabel1;
+    private JLabel heartLabel2;
+    private JLabel heartLabel3;
 
     public UIPanel(int width, int height) {
         this.width = width;
@@ -32,10 +36,22 @@ public class UIPanel extends JPanel implements Observer {
 
         this.add(Box.createHorizontalGlue());
 
-        livesLabel = new JLabel("Lives: " + lives);
+        livesLabel = new JLabel("Lives: ");
         livesLabel.setFont(scoreLabel.getFont().deriveFont(20.0F));
         livesLabel.setForeground(Color.white);
         this.add(livesLabel);
+
+        heartLabel1 = new JLabel();
+        heartLabel1.setIcon(lifeIcon);
+        this.add(heartLabel1);
+
+        heartLabel2 = new JLabel();
+        heartLabel2.setIcon(lifeIcon);
+        this.add(heartLabel2);
+
+        heartLabel3 = new JLabel();
+        heartLabel3.setIcon(lifeIcon);
+        this.add(heartLabel3);
     }
 
     public void updateScore(int incrScore) {
@@ -45,7 +61,17 @@ public class UIPanel extends JPanel implements Observer {
 
     public void updateLives() {
         lives--;
-        this.livesLabel.setText("Lives: " + lives);
+        switch (lives){
+            case 2:
+                heartLabel3.setVisible(false);
+                break;
+            case 1:
+                heartLabel2.setVisible(false);
+                break;
+            case 0:
+                heartLabel1.setVisible(false);
+                break;
+        }
     }
 
     public int getScore() {
