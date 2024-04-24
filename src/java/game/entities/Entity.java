@@ -7,6 +7,8 @@ public abstract class Entity {
     protected int size;
     protected int xPos;
     protected int yPos;
+    protected int defaultXPos;
+    protected int defaultYPos;
 
     protected boolean destroyed = false;
 
@@ -14,6 +16,8 @@ public abstract class Entity {
         this.size = size;
         this.xPos = xPos;
         this.yPos = yPos;
+        this.defaultXPos = xPos;
+        this.defaultYPos = yPos;
     }
 
     public void update() {}
@@ -46,5 +50,7 @@ public abstract class Entity {
 
     public void resetPosition() {
         destroyed = false;
+        this.xPos = defaultXPos;
+        this.yPos = defaultYPos;
     }
 }

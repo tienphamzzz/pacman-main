@@ -13,4 +13,5 @@ public class PacGum extends StaticEntity {
         g.setColor(new Color(255, 183, 174));
         g.fillRect(xPos, yPos, size, size);
     }
+
 }

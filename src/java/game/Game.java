@@ -96,10 +96,10 @@ public class Game implements Observer {
         }
     }
 
+
     public void decressLives() {
         lives--;
         if (lives == 0) {
-            System.out.println("Game over !\nScore : " + GameLauncher.getUIPanel().getScore());
             System.exit(0);
         } else {
             pacman.resetPosition();
@@ -108,6 +108,29 @@ public class Game implements Observer {
             }
             Game.getFirstInput();
         }
+    }
+
+    public static void resetGame(Game game) {
+        game.lives = 4;
+        pacman.resetPosition();
+        for (Ghost gh : game.ghosts) {
+            gh.resetPosition();
+        }
+
+        //reset PacGums
+        for (Entity o : game.objects) {
+            if (o instanceof PacGum) {
+                o.resetPosition();
+            }
+        }
+        //reset SuperPacGums
+        for (Entity o : game.objects) {
+            if (o instanceof SuperPacGum) {
+                o.resetPosition();
+            }
+        }
+
+        Game.getFirstInput();
     }
 
     public int getLives() {
@@ -125,7 +148,9 @@ public class Game implements Observer {
     //Mise à jour de toutes les entités
     public void update() {
         for (Entity o: objects) {
-            if (!o.isDestroyed()) o.update();
+            if (!o.isDestroyed()){
+                o.update();
+            }
         }
     }
 

@@ -18,12 +18,12 @@ public class GameplayPanel extends JPanel implements Runnable {
     private boolean running = false;
 
     private BufferedImage img;
-    private Graphics2D g;
+    public static Graphics2D g;
     private Image backgroundImage; //Ảnh nền
 
     private KeyHandler key;
 
-    private Game game;
+    public static Game game;
 
     public GameplayPanel(int width, int height) throws IOException {
         GameplayPanel.width = width;
@@ -32,6 +32,10 @@ public class GameplayPanel extends JPanel implements Runnable {
         setFocusable(true);
         requestFocus();
         backgroundImage = ImageIO.read(new File("assets/img/background.png"));
+    }
+
+    public static Game getGame() {
+        return game;
     }
 
     @Override
@@ -73,12 +77,14 @@ public class GameplayPanel extends JPanel implements Runnable {
         }
     }
 
+
     //Affichage du jeu : on affiche l'image avec le rendu
     public void draw() {
         Graphics g2 = this.getGraphics();
         g2.drawImage(img, 0, 0, width, height, null);
         g2.dispose();
     }
+
 
     @Override
     public void run() {

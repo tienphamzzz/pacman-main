@@ -57,6 +57,32 @@ public class UIPanel extends JPanel implements Observer {
     public void updateScore(int incrScore) {
         this.score += incrScore;
         this.scoreLabel.setText("Score: " + score);
+
+        if (this.score >= 5300) {
+            showEndGameOption();
+        }
+    }
+
+    private void showEndGameOption() {
+        String[] options = {"Chơi lại", "Thoát"};
+        int response = JOptionPane.showOptionDialog(null, "Bạn muốn làm gì tiếp theo?", "Kết thúc trò chơi",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]);
+
+        if (response == 0) {
+            // Người chơi chọn chơi lại
+            // Reset game tại đây
+            score = 0;
+            scoreLabel.setText("Score: " + score);
+            lives = 3;
+            heartLabel1.setVisible(true);
+            heartLabel2.setVisible(true);
+            heartLabel3.setVisible(true);
+            Game.resetGame(GameplayPanel.getGame());
+        } else {
+            // Người chơi chọn thoát
+            System.exit(0);
+        }
     }
 
     public void updateLives() {
@@ -70,6 +96,7 @@ public class UIPanel extends JPanel implements Observer {
                 break;
             case 0:
                 heartLabel1.setVisible(false);
+                showEndGameOption();
                 break;
         }
     }

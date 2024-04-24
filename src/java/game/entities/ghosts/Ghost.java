@@ -94,11 +94,12 @@ public abstract class Ghost extends MovingEntity {
     }
 
     public void resetPosition() {
-        xPos = 208;
-        yPos = 168;
+        xPos = defaultXPos;
+        yPos = defaultYPos;
         direction = 0;
         state = houseMode;
-        switchScatterMode();
+        isChasing = false;
+        modeTimer = 0;
     }
 
     @Override
