@@ -36,12 +36,12 @@ public abstract class MovingEntity extends Entity {
     }
 
     public void updatePosition() {
-        //Mise à jour de la position de l'entité
-        if (!(xSpd == 0 && ySpd == 0)) { //Si la vitesse horizontale ou la vitesse verticale n'est pas nulle, on incrémente la position horizontale et verticale en conséquence
+        //Cập nhật vị trí thực thể
+        if (!(xSpd == 0 && ySpd == 0)) { //Nếu tốc độ ngang hoặc tốc độ dọc không bằng 0 thì chúng ta tăng vị trí ngang và dọc tương ứng
             xPos+=xSpd;
             yPos+=ySpd;
 
-            //En fonction de la direction emprunté, on change la valeur de la direction (un entier permettant de savoir la partie de l'image à afficher notamment)
+            // Tùy thuộc vào hướng được thực hiện, chúng tôi thay đổi giá trị của hướng (một số nguyên cho phép chúng tôi biết cụ thể phần hình ảnh sẽ hiển thị)
             if (xSpd > 0) {
                 direction = 0;
             } else if (xSpd < 0) {
@@ -52,14 +52,14 @@ public abstract class MovingEntity extends Entity {
                 direction = 3;
             }
 
-            //On incrémente la valeur de l'image courante de l'animation à afficher (la vitesse peut varier), et selon le nombre d'images de l'animation, la valeur fait une boucle
+            //Chúng tôi tăng giá trị của hình ảnh hiện tại của hoạt ảnh cần hiển thị (tốc độ có thể thay đổi) và tùy thuộc vào số lượng hình ảnh của hoạt ảnh mà các vòng lặp giá trị
             subimage += imageSpd;
             if (subimage >= nbSubimagesPerCycle) {
                 subimage = 0;
             }
         }
 
-        //Si l'entité va au dela des bords de la zone de jeu, elle passe de l'autre côté
+        //Nếu thực thể vượt ra ngoài rìa của khu vực chơi, nó sẽ chuyển sang phía bên kia
         if (xPos > GameplayPanel.width) {
             xPos = 0 - size + spd;
         }
@@ -79,8 +79,8 @@ public abstract class MovingEntity extends Entity {
 
     @Override
     public void render(Graphics2D g) {
-        //Par défaut, on considère que chaque "sprite" contient 4 variations de l'animation correspondant à une direction et chaque animation a un certain nombre d'images
-        //En sachant cela, on affiche seulement la partie de l'image du sprite correspondant à la bonne direction et à la bonne frame de l'animation
+        //Theo mặc định, chúng tôi coi mỗi "sprite" chứa 4 biến thể hoạt ảnh tương ứng với một hướng và mỗi hoạt ảnh có một số lượng hình ảnh nhất định
+        //Biết được điều này nên chúng ta chỉ hiển thị phần ảnh sprite tương ứng với đúng hướng và khung bên phải của ảnh động
         g.drawImage(sprite.getSubimage((int)subimage * size + direction * size * nbSubimagesPerCycle, 0, size, size), this.xPos, this.yPos,null);
     }
 

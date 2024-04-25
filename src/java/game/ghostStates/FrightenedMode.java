@@ -22,7 +22,7 @@ public class FrightenedMode extends GhostState{
         ghost.switchChaseModeOrScatterMode();
     }
 
-    //Dans cet état, la position ciblée est une case aléatoire autour du fantôme
+    // Ở trạng thái này, vị trí mục tiêu là một hình vuông ngẫu nhiên xung quanh con ma
     @Override
     public int[] getTargetPosition(){
         int[] position = new int[2];

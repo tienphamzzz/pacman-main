@@ -2,25 +2,25 @@ package game.ghostStates;
 
 import game.entities.ghosts.Ghost;
 
-//Classe pour décrire l'état concret d'un fantôme en train de poursuivre Pacman
+//Lớp mô tả cụ thể trạng thái của một con ma đuổi theo Pacman
 public class ChaseMode extends GhostState{
     public ChaseMode(Ghost ghost) {
         super(ghost);
     }
 
-    //Transition lorsqu'une SuperPacGum est mangée
+    //Chuyển đổi khi ăn SuperPacGum
     @Override
     public void superPacGumEaten() {
         ghost.switchFrightenedMode();
     }
 
-    //Transition lorsque le timer de l'état courant est terminé (il alterne entre ChaseMode et ScatterMode)
+    //Chuyển đổi khi bộ đếm thời gian trạng thái hiện tại kết thúc (nó xen kẽ giữa ChaseMode và ScatterMode)
     @Override
     public void timerModeOver() {
         ghost.switchScatterMode();
     }
 
-    //Dans cet état, la position ciblée dépend de la stratégie du fantôme
+    //Ở trạng thái này, vị trí mục tiêu phụ thuộc vào chiến lược của hồn ma
     @Override
     public int[] getTargetPosition() {
         return ghost.getStrategy().getChaseTargetPosition();

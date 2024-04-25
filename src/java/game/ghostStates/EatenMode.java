@@ -25,7 +25,7 @@ public class EatenMode extends GhostState{
         return position;
     }
 
-    //Même chose que la méthode de la classe abstraite, mais on ignore ici les collisions avec les murs de la maison des fantômes
+    //Tương tự như phương thức lớp trừu tượng, nhưng ở đây chúng ta bỏ qua sự va chạm với các bức tường của ngôi nhà ma
     @Override
     public void computeNextDir() {
         int new_xSpd = 0;
